@@ -1,4 +1,5 @@
 # Chaupal • A Seal of Belonging for Every Chaupal
+live on :- https://chaupal-ten.vercel.app/
 
 > **Sovereign Zero-Knowledge Civic Membership Platform connecting 12 autonomous Indian communities.**
 
