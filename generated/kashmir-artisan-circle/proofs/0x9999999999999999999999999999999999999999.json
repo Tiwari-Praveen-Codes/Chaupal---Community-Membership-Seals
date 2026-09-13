@@ -1,0 +1,10 @@
+{
+  "groupSlug": "kashmir-artisan-circle",
+  "groupId": "0xddb692dd521fa65e75f0661e8f9ae02afc81c38c9dc196cb605161f004e84324",
+  "member": "0x9999999999999999999999999999999999999999",
+  "proof": [
+    "0x108d3c6de6da32fa303c224296e3b6731dfbfa1bd2b59434e1529b7cd98f05a3"
+  ],
+  "leaf": "0xba66e70a601c4789e9aecf0f2a0c88338ccb21b550c19d4295daf0da0055e073",
+  "root": "0xaec7e5be09fb155cd508ead4c2cd4b4585780631cfceee9e71416b2a85e7549c"
+}

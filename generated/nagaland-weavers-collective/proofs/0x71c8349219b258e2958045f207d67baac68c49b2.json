@@ -1,0 +1,10 @@
+{
+  "groupSlug": "nagaland-weavers-collective",
+  "groupId": "0x767b33f50a50ac8d411a0557d17ae513925f2782c7d71cf25ad716aba78539b8",
+  "member": "0x71c8349219b258e2958045f207d67baac68c49b2",
+  "proof": [
+    "0x820e6b3ef25b4d711485a691cd30176bf210e44ee5f6022d4da57941dff7645e"
+  ],
+  "leaf": "0xd23ae28f329dcae94596706cc81a9efd9d88007ebe25dac40d5c003d3b386aef",
+  "root": "0x5b21f131593037e0bacd8cee225f3c37a2c3049aa24e8745ece2eeed822700f3"
+}

@@ -1,0 +1,10 @@
+{
+  "groupSlug": "bengal-cultural-circle",
+  "groupId": "0xb03b36ffbd6f945a11dbeb8f90f1486e67ccd20b42dd8b91e2f76e129e529c6e",
+  "member": "0x71c8349219b258e2958045f207d67baac68c49b2",
+  "proof": [
+    "0xe8d6ecad6665900224cd1ff8c472d62f92772975f978a42f4ca1effcd61a4e24"
+  ],
+  "leaf": "0xbd86f918173b4e2162168416a16802f6bb889bc9501a5f84b2f6ae0839e74001",
+  "root": "0x0c0c2d2908c61556617e3e68db591936da184574c1913d8d2f55f29a42d1c752"
+}

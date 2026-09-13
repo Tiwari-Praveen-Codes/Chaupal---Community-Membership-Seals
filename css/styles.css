@@ -1,0 +1,234 @@
+/* ==========================================================================
+   CHAUPAL - PRIVACY MEMBERSHIP PLATFORM DESIGN SYSTEM & STYLES
+   Civic Hearth / Modern Civic Tactility Architecture
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Civic Hearth Color Palette */
+  --primary: #9f3c16;
+  --primary-hover: #822801;
+  --primary-container: #bf542c;
+  --primary-fixed: #ffdbcf;
+  --primary-fixed-dim: #ffb59c;
+  
+  --secondary: #3b6750;
+  --secondary-container: #bdeed0;
+  --secondary-hover: #234f3a;
+  --secondary-tint: #e8f0eb;
+
+  --tertiary: #9d3e1a;
+  --tertiary-container: #bd5630;
+  --tertiary-fixed: #ffdbcf;
+
+  --surface: #fff8f5;
+  --surface-bright: #fff8f5;
+  --surface-dim: #e7d7cc;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #fff1e8;
+  --surface-container: #fbebdf;
+  --surface-container-high: #f5e5da;
+  --surface-container-highest: #f0e0d4;
+
+  --on-surface: #221a13;
+  --on-surface-variant: #57423b;
+  --outline: #8a726a;
+  --outline-variant: #dec0b7;
+
+  --shadow-subtle: 0 2px 8px -2px rgba(36, 28, 21, 0.05), 0 1px 3px -1px rgba(36, 28, 21, 0.04);
+  --shadow-floating: 0 12px 32px -4px rgba(36, 28, 21, 0.08), 0 4px 12px -2px rgba(36, 28, 21, 0.04);
+  --shadow-modal: 0 24px 48px -12px rgba(36, 28, 21, 0.18), 0 8px 16px -4px rgba(36, 28, 21, 0.08);
+}
+
+/* Base resets & typography */
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-body);
+  background-color: var(--surface);
+  color: var(--on-surface);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--surface);
+  color: var(--on-surface);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Selection */
+::selection {
+  background: #ffdbcf;
+  color: #390c00;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface-container-low);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--outline-variant);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--outline);
+}
+
+/* Font classes */
+.font-display { font-family: var(--font-display); }
+.font-body { font-family: var(--font-body); }
+.font-mono { font-family: var(--font-mono); }
+
+/* Animation helpers */
+@keyframes pulseSlow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.02); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-pulse-slow {
+  animation: pulseSlow 4s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+.shimmer-effect {
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+/* Holographic Card Tilt & Sheen */
+.holographic-card {
+  position: relative;
+  transition: transform 0.25s ease-out, box-shadow 0.25s ease-out;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.holographic-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(200, 90, 50, 0.08) 35%,
+    rgba(46, 90, 68, 0.08) 70%,
+    rgba(255, 255, 255, 0.3) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.holographic-card:hover::before {
+  opacity: 1;
+}
+
+.holographic-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 16px 36px -8px rgba(36, 28, 21, 0.12), 0 4px 12px -2px rgba(36, 28, 21, 0.06);
+}
+
+/* ZK Proof Branch Visualizer */
+.merkle-branch-node {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.merkle-branch-node:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+/* Toast stacking */
+#toastContainer {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.toast-item {
+  pointer-events: auto;
+  animation: toastSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes toastSlideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+}
+
+/* View transitions */
+.spa-view {
+  display: none;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+.spa-view.active-view {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Print Certificate Styling */
+@media print {
+  header, footer, nav, button, .no-print {
+    display: none !important;
+  }
+  body, .spa-view {
+    background: white !important;
+    color: black !important;
+  }
+  .print-certificate-container {
+    display: block !important;
+    width: 100% !important;
+    border: 3px double #9f3c16 !important;
+    padding: 40px !important;
+    margin: 0 auto !important;
+  }
+}

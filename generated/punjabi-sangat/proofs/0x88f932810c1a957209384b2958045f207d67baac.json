@@ -1,0 +1,10 @@
+{
+  "groupSlug": "punjabi-sangat",
+  "groupId": "0xc1e9b1dc16ff1da25e9c9886e2e754c2e3f23a51a895f503d34c7d9158ed9ed6",
+  "member": "0x88f932810c1a957209384b2958045f207d67baac",
+  "proof": [
+    "0xb97e6bf4f5e7e10bc02fb78fb202c6972fc4d24039c52974e747ba25a730fd86"
+  ],
+  "leaf": "0x98dff7982bd0bc678d93f64a0ba4483bb3ca852be6ccff7341a338889b687dab",
+  "root": "0x71ad5e4da0e56d5850187da3f534891a357023cfc54dd5070c3c4cd83ae7d528"
+}

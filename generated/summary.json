@@ -1,0 +1,86 @@
+{
+  "punjabi-sangat": {
+    "groupSlug": "punjabi-sangat",
+    "groupId": "0xc1e9b1dc16ff1da25e9c9886e2e754c2e3f23a51a895f503d34c7d9158ed9ed6",
+    "merkleRoot": "0xb28cab5a10b9abcbd938adaa03777f8947641c1f0a3d831ceac9ba661dcc4d2e",
+    "memberCount": 5,
+    "generatedAt": "2026-09-13T08:30:06.651Z"
+  },
+  "maharashtra-ganesh-mandal": {
+    "groupSlug": "maharashtra-ganesh-mandal",
+    "groupId": "0xad56af723b7399010fcd051f28a1e4d8b2c85872956866b015198b8fb2c555cb",
+    "merkleRoot": "0x22b75c2bc17b0ea836df876d0330bb65130f5fa5b7c5abe2559f70bdba128534",
+    "memberCount": 3,
+    "generatedAt": "2026-09-13T08:30:06.671Z"
+  },
+  "nagaland-weavers-collective": {
+    "groupSlug": "nagaland-weavers-collective",
+    "groupId": "0x767b33f50a50ac8d411a0557d17ae513925f2782c7d71cf25ad716aba78539b8",
+    "merkleRoot": "0x5b21f131593037e0bacd8cee225f3c37a2c3049aa24e8745ece2eeed822700f3",
+    "memberCount": 3,
+    "generatedAt": "2026-09-13T08:30:06.682Z"
+  },
+  "bengal-cultural-circle": {
+    "groupSlug": "bengal-cultural-circle",
+    "groupId": "0xb03b36ffbd6f945a11dbeb8f90f1486e67ccd20b42dd8b91e2f76e129e529c6e",
+    "merkleRoot": "0x0c0c2d2908c61556617e3e68db591936da184574c1913d8d2f55f29a42d1c752",
+    "memberCount": 3,
+    "generatedAt": "2026-09-13T08:30:06.691Z"
+  },
+  "kerala-arts-sabha": {
+    "groupSlug": "kerala-arts-sabha",
+    "groupId": "0x9e1f1464c6fd3f04efd5f937b1e078a650c93a1cda8a8199b53b1892113cce7d",
+    "merkleRoot": "0x98a6dcc303a4fdb9de9de2b1ac5448392db434d3b14b1a111aa06a2c10519fa1",
+    "memberCount": 3,
+    "generatedAt": "2026-09-13T08:30:06.700Z"
+  },
+  "rajasthan-craft-guild": {
+    "groupSlug": "rajasthan-craft-guild",
+    "groupId": "0x9cc782a6583d5b2eaa723d61827a5480be765db071958a9f313564574d763b6e",
+    "merkleRoot": "0x7108c6e6b6c92c4b6444d269077debf3ae54fc6c81e6e7ce0ba538796210c0f3",
+    "memberCount": 3,
+    "generatedAt": "2026-09-13T08:30:06.709Z"
+  },
+  "assam-community-sabha": {
+    "groupSlug": "assam-community-sabha",
+    "groupId": "0x82098342d47afc908469628d070289dec90f0db04258eb9c8913abd776922837",
+    "merkleRoot": "0x1927538cb5a52b15e6768350b54006d6f95ee37647ddafc2b76f4230620ca6a8",
+    "memberCount": 3,
+    "generatedAt": "2026-09-13T08:30:06.719Z"
+  },
+  "tamil-heritage-circle": {
+    "groupSlug": "tamil-heritage-circle",
+    "groupId": "0x910335c2c61893764fe515276c710a5aa0ae63ffcaeed9ee1167b3486a2e61cf",
+    "merkleRoot": "0x855b10f22be6b7acf4fbc0a3a1d7eaca18109a0a3fd6c2c872e5e0fce202aac0",
+    "memberCount": 3,
+    "generatedAt": "2026-09-13T08:30:06.726Z"
+  },
+  "gujarat-garba-mandal": {
+    "groupSlug": "gujarat-garba-mandal",
+    "groupId": "0xbfecf0443b84abe36c4875f5f789a237d06e326890765d477ccd8330f5902bba",
+    "merkleRoot": "0x22c0f843b5a377e9d27fd9f12d7999f4f0bc633876c16b4fb5d9d2e5ff274187",
+    "memberCount": 3,
+    "generatedAt": "2026-09-13T08:30:06.733Z"
+  },
+  "odisha-handloom-collective": {
+    "groupSlug": "odisha-handloom-collective",
+    "groupId": "0x4d84df7fe0b09c36327788f8722f131e8780a29c354ae75d0a29708e6d31647f",
+    "merkleRoot": "0x7b0098d6ccfd7c4d97ffa4efc99e92602a8189f95ea9172830dda19c99bf851b",
+    "memberCount": 3,
+    "generatedAt": "2026-09-13T08:30:06.741Z"
+  },
+  "kashmir-artisan-circle": {
+    "groupSlug": "kashmir-artisan-circle",
+    "groupId": "0xddb692dd521fa65e75f0661e8f9ae02afc81c38c9dc196cb605161f004e84324",
+    "merkleRoot": "0xaec7e5be09fb155cd508ead4c2cd4b4585780631cfceee9e71416b2a85e7549c",
+    "memberCount": 3,
+    "generatedAt": "2026-09-13T08:30:06.748Z"
+  },
+  "goa-cultural-association": {
+    "groupSlug": "goa-cultural-association",
+    "groupId": "0x0322aa7bb7ea2ebcbaa344d9f2971bc1f163da6390ac1af788221b89133103c3",
+    "merkleRoot": "0x70b48ab2382bd1bb1179ddec3223aea177df8a4869012cd5cfb5f1e6a5951ab8",
+    "memberCount": 3,
+    "generatedAt": "2026-09-13T08:30:06.760Z"
+  }
+}

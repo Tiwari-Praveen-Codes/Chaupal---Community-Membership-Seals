@@ -1,0 +1,10 @@
+{
+  "groupSlug": "odisha-handloom-collective",
+  "groupId": "0x4d84df7fe0b09c36327788f8722f131e8780a29c354ae75d0a29708e6d31647f",
+  "member": "0x71c8349219b258e2958045f207d67baac68c49b2",
+  "proof": [
+    "0x4086194dd6982de02582e297f5e1f13ddb95e5f82a179249e798901ad9dfecb4"
+  ],
+  "leaf": "0xd8a8ff389d2a2a112b1cba29d36caf5387cb228210fe4ea55fa2a8a714b4f452",
+  "root": "0x7b0098d6ccfd7c4d97ffa4efc99e92602a8189f95ea9172830dda19c99bf851b"
+}

@@ -1,0 +1,10 @@
+{
+  "groupSlug": "gujarat-garba-mandal",
+  "groupId": "0xbfecf0443b84abe36c4875f5f789a237d06e326890765d477ccd8330f5902bba",
+  "member": "0x71c8349219b258e2958045f207d67baac68c49b2",
+  "proof": [
+    "0x5f26f2f8686e92e1cb1817468a8f33a2a7991b396d5b644692c3fb69a42cb5c1"
+  ],
+  "leaf": "0x7b5a45a90bd7d3064b8ab4635d142adcf38db05c21cc2d33cdefd597ecda69ac",
+  "root": "0x22c0f843b5a377e9d27fd9f12d7999f4f0bc633876c16b4fb5d9d2e5ff274187"
+}

@@ -1,0 +1,11 @@
+{
+  "groupSlug": "goa-cultural-association",
+  "groupId": "0x0322aa7bb7ea2ebcbaa344d9f2971bc1f163da6390ac1af788221b89133103c3",
+  "member": "0x9999999999999999999999999999999999999999",
+  "proof": [
+    "0x27d94b4a0ece6ac13a4ab1a750b358484cbc8c80b9b88b5530aab710d96168b5",
+    "0xa2aa4cc5070b719d9ce21f519121d2ff4c0b90d8e8fdcd8f3af1f7c10caaf530"
+  ],
+  "leaf": "0x6c9d5ca4039ce3c877c4639e83041bec9121c8b0679bd93a00faf4f0d1427023",
+  "root": "0x70b48ab2382bd1bb1179ddec3223aea177df8a4869012cd5cfb5f1e6a5951ab8"
+}

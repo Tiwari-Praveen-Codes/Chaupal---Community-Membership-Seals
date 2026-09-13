@@ -1,0 +1,46 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./lib/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        primary: "#9f3c16",
+        "primary-hover": "#822801",
+        "primary-container": "#bf542c",
+        "primary-fixed": "#ffdbcf",
+        "primary-fixed-dim": "#ffb59c",
+        secondary: "#3b6750",
+        "secondary-container": "#bdeed0",
+        "secondary-hover": "#234f3a",
+        tertiary: "#9d3e1a",
+        "tertiary-container": "#bd5630",
+        "tertiary-fixed": "#ffdbcf",
+        surface: "#fff8f5",
+        "surface-dim": "#e7d7cc",
+        "surface-bright": "#fff8f5",
+        "surface-container-lowest": "#ffffff",
+        "surface-container-low": "#fff1e8",
+        "surface-container": "#fbebdf",
+        "surface-container-high": "#f5e5da",
+        "surface-container-highest": "#f0e0d4",
+        "on-surface": "#221a13",
+        "on-surface-variant": "#57423b",
+        outline: "#8a726a",
+        "outline-variant": "#dec0b7",
+        error: "#ba1a1a",
+        "error-container": "#ffdad6",
+      },
+      fontFamily: {
+        display: ["Outfit", "sans-serif"],
+        body: ["Plus Jakarta Sans", "sans-serif"],
+        mono: ["JetBrains Mono", "monospace"],
+      },
+    },
+  },
+  plugins: [],
+}

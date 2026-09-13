@@ -1,0 +1,10 @@
+{
+  "groupSlug": "kerala-arts-sabha",
+  "groupId": "0x9e1f1464c6fd3f04efd5f937b1e078a650c93a1cda8a8199b53b1892113cce7d",
+  "member": "0x5555555555555555555555555555555555555555",
+  "proof": [
+    "0x851ea418df68ea16b36f50c36441db3c55601fb83715611258ccf3f2f41263d6"
+  ],
+  "leaf": "0xe6dbb627fcd0600713fb8379541cf3c86fb45cad60bd19735e19bcb5b3f1f6ad",
+  "root": "0x98a6dcc303a4fdb9de9de2b1ac5448392db434d3b14b1a111aa06a2c10519fa1"
+}

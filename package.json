@@ -1,0 +1,39 @@
+{
+  "name": "chaupal",
+  "version": "1.0.0",
+  "description": "A Seal of Belonging for Every Chaupal - Sovereign Zero-Knowledge Civic Membership Platform",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "merkle:build": "tsx scripts/build-tree.ts",
+    "merkle:proof": "tsx scripts/generate-proof.ts",
+    "test": "tsx test/ChaupalMembership.test.ts",
+    "test:contracts": "tsx test/ChaupalMembership.test.ts"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.2.0",
+    "@openzeppelin/merkle-tree": "^1.0.7",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.16.0",
+    "next": "^14.2.24",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^3.0.2",
+    "viem": "^2.23.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.24",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.24",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
+  }
+}

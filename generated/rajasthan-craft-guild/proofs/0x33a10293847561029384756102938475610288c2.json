@@ -1,0 +1,10 @@
+{
+  "groupSlug": "rajasthan-craft-guild",
+  "groupId": "0x9cc782a6583d5b2eaa723d61827a5480be765db071958a9f313564574d763b6e",
+  "member": "0x33a10293847561029384756102938475610288c2",
+  "proof": [
+    "0x74229a253998ae15ac345ae11eec3a4cc7555041f580a109de941d9f5c03616d"
+  ],
+  "leaf": "0xe281bc26bdfb46fdc4c49f7e06cb8b5cc98bdbd9d4e6f91b8dbf77af07538c26",
+  "root": "0x7108c6e6b6c92c4b6444d269077debf3ae54fc6c81e6e7ce0ba538796210c0f3"
+}

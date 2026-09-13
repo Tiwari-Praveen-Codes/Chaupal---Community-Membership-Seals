@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Chaupal • Sovereign Zero-Knowledge Civic Membership Platform</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#9f3c16",
+            "primary-hover": "#822801",
+            "primary-container": "#bf542c",
+            "primary-fixed": "#ffdbcf",
+            "primary-fixed-dim": "#ffb59c",
+            "secondary": "#3b6750",
+            "secondary-container": "#bdeed0",
+            "secondary-hover": "#234f3a",
+            "tertiary": "#9d3e1a",
+            "tertiary-container": "#bd5630",
+            "tertiary-fixed": "#ffdbcf",
+            "surface": "#fff8f5",
+            "surface-dim": "#e7d7cc",
+            "surface-bright": "#fff8f5",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#fff1e8",
+            "surface-container": "#fbebdf",
+            "surface-container-high": "#f5e5da",
+            "surface-container-highest": "#f0e0d4",
+            "on-surface": "#221a13",
+            "on-surface-variant": "#57423b",
+            "outline": "#8a726a",
+            "outline-variant": "#dec0b7",
+            "error": "#ba1a1a",
+            "error-container": "#ffdad6"
+          },
+          spacing: {
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2.5rem",
+            "margin": "2.5rem",
+            "margin-mobile": "1.25rem",
+            "gutter": "1.5rem",
+            "gutter-mobile": "1rem"
+          },
+          fontFamily: {
+            "display": ["Outfit", "sans-serif"],
+            "body": ["Plus Jakarta Sans", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Custom Design System Styles -->
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+
+<body class="bg-surface font-body text-on-surface antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+
+  <!-- =========================================================================
+       GLOBAL HEADER & PRIVACY BANNER
+       ========================================================================= -->
+  <header class="fixed top-0 inset-x-0 z-50 bg-surface/95 backdrop-blur-xl shadow-subtle border-b border-outline-variant/30">
+    <!-- Top Privacy Banner -->
+    <div class="bg-surface-container-low px-margin-mobile lg:px-margin py-1 text-center border-b border-outline-variant/20">
+      <div class="max-w-7xl mx-auto flex items-center justify-center gap-space-xs text-xs">
+        <span class="material-symbols-outlined text-secondary text-[15px]">lock</span>
+        <p class="text-on-surface-variant">
+          <span class="font-semibold text-secondary">Privacy Principle:</span> Member lists are strictly local. Only cryptographic Merkle roots exist on-chain.
+        </p>
+      </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <div class="h-20 max-w-7xl mx-auto px-margin-mobile lg:px-margin flex items-center justify-between gap-space-md">
+      <!-- Logo & Brand Title -->
+      <a href="#home" class="flex items-center gap-space-md group">
+        <img alt="Chaupal Emblem Logo" class="h-10 w-auto object-contain transition-transform group-hover:scale-105" src="assets/logo.svg"/>
+        <div class="flex flex-col">
+          <span class="font-display text-2xl tracking-tight text-primary font-extrabold leading-none">Chaupal</span>
+          <span class="font-body text-[11px] text-on-surface-variant leading-tight mt-0.5">चौपाल • Community Cryptographic Hearth</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="hidden xl:flex items-center gap-1 bg-surface-container-low p-1.5 rounded-full border border-outline-variant/30 shadow-xs">
+        <a href="#home" data-nav-target="home" class="px-space-md py-1.5 rounded-full text-xs font-semibold transition-all">Home</a>
+        <a href="#directory" data-nav-target="directory" class="px-space-md py-1.5 rounded-full text-xs font-semibold transition-all">Directory</a>
+        <a href="#claim" data-nav-target="claim" class="px-space-md py-1.5 rounded-full text-xs font-semibold transition-all">Verify & Claim</a>
+        <a href="#dashboard" data-nav-target="seals" class="px-space-md py-1.5 rounded-full text-xs font-semibold transition-all">My Seals</a>
+        <a href="#steward" data-nav-target="steward" class="px-space-md py-1.5 rounded-full text-xs font-semibold transition-all flex items-center gap-1">
+          <span>Steward Console</span>
+          <span class="text-[10px] bg-tertiary-fixed text-primary px-1.5 py-0.5 rounded-full uppercase tracking-wider font-bold">Root Admin</span>
+        </a>
+      </nav>
+
+      <!-- Right Header Actions (Network & Wallet Connect) -->
+      <div class="flex items-center gap-space-sm">
+        <!-- Polygon Network Badge -->
+        <div class="hidden sm:flex items-center gap-1.5 px-space-md py-1.5 rounded-full bg-secondary-container text-on-secondary-container text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+          <span class="wallet-network-display">Polygon PoS</span>
+        </div>
+
+        <!-- Wallet Button -->
+        <button onclick="openWalletModal()" class="flex items-center bg-surface-container-low pl-space-md pr-1.5 py-1 rounded-full gap-space-sm shadow-subtle hover:bg-surface-container border border-outline-variant/30 transition-all">
+          <span class="font-mono text-xs text-on-surface font-semibold hidden md:inline wallet-address-display">0x71C...49b2</span>
+          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-xs">
+            <span class="material-symbols-outlined text-[18px]">person</span>
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant text-[18px]">expand_more</span>
+        </button>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobileMenuToggleBtn" class="xl:hidden p-2 rounded-xl bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors">
+          <span class="material-symbols-outlined text-[24px]">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div id="mobileNavDrawer" class="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm hidden">
+    <div class="fixed top-0 right-0 bottom-0 w-80 bg-surface p-space-lg shadow-2xl flex flex-col justify-between">
+      <div>
+        <div class="flex items-center justify-between pb-space-md border-b border-outline-variant/30 mb-space-md">
+          <div class="flex items-center gap-2">
+            <img alt="Chaupal Logo" class="h-8 w-auto" src="assets/logo.svg"/>
+            <span class="font-display font-bold text-lg text-primary">Chaupal</span>
+          </div>
+          <button id="closeMobileNavBtn" class="p-1.5 rounded-full bg-surface-container text-on-surface">
+            <span class="material-symbols-outlined text-[20px]">close</span>
+          </button>
+        </div>
+
+        <nav class="flex flex-col gap-2">
+          <a href="#home" onclick="document.getElementById('mobileNavDrawer').classList.add('hidden')" class="p-3 rounded-xl hover:bg-surface-container font-semibold text-sm">Home</a>
+          <a href="#directory" onclick="document.getElementById('mobileNavDrawer').classList.add('hidden')" class="p-3 rounded-xl hover:bg-surface-container font-semibold text-sm">Community Directory</a>
+          <a href="#claim" onclick="document.getElementById('mobileNavDrawer').classList.add('hidden')" class="p-3 rounded-xl hover:bg-surface-container font-semibold text-sm">Verify & Claim Flow</a>
+          <a href="#dashboard" onclick="document.getElementById('mobileNavDrawer').classList.add('hidden')" class="p-3 rounded-xl hover:bg-surface-container font-semibold text-sm">My Soulbound Seals</a>
+          <a href="#steward" onclick="document.getElementById('mobileNavDrawer').classList.add('hidden')" class="p-3 rounded-xl hover:bg-surface-container font-semibold text-sm">Steward Console</a>
+        </nav>
+      </div>
+
+      <div class="pt-space-md border-t border-outline-variant/30">
+        <button onclick="openWalletModal(); document.getElementById('mobileNavDrawer').classList.add('hidden');" class="w-full py-2.5 rounded-xl bg-primary text-on-primary text-xs font-semibold shadow-sm flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+          <span>Wallet Settings</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MAIN SPA ROUTER WRAPPER
+       ========================================================================= -->
+  <main class="w-full pt-28 bg-surface min-h-screen">
+
+    <!-- -----------------------------------------------------------------------
+         VIEW 1: HOME / LANDING PAGE
+         ----------------------------------------------------------------------- -->
+    <section id="view-home" class="spa-view active-view w-full">
+      <!-- Ambient Glow Orbs -->
+      <div class="relative w-full overflow-hidden px-margin-mobile lg:px-margin pb-space-xl">
+        <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[840px] h-[520px] bg-gradient-to-b from-primary-fixed/40 via-surface-container/60 to-transparent rounded-full blur-3xl pointer-events-none -z-10"></div>
+        <div class="absolute top-48 right-[-10%] w-[480px] h-[480px] bg-secondary-container/30 rounded-full blur-3xl pointer-events-none -z-10"></div>
+
+        <!-- Hero Content -->
+        <div class="max-w-7xl mx-auto flex flex-col items-center text-center pt-6">
+          <div class="inline-flex items-center gap-space-xs px-space-md py-1 rounded-full bg-surface-container-high shadow-xs mb-space-md border border-outline-variant/30">
+            <span class="w-2 h-2 rounded-full bg-secondary"></span>
+            <span class="material-symbols-outlined text-secondary text-[16px]">verified</span>
+            <span class="font-body text-xs text-on-surface font-semibold tracking-wide uppercase">Zero-Knowledge & Merkle Verified Civic Membership</span>
+          </div>
+
+          <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-on-surface max-w-4xl tracking-tight leading-tight">
+            Belong to your community. <br class="hidden sm:inline"/>
+            <span class="text-primary italic font-serif">Prove it privately.</span>
+          </h1>
+
+          <p class="font-body text-base sm:text-lg text-on-surface-variant max-w-2xl mt-space-md leading-relaxed">
+            Chaupal lets independent Indian communities verify membership without putting their member lists on a public chain. Autonomous stewards, private rosters, and portable soulbound seals.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="mt-space-lg flex flex-wrap items-center justify-center gap-space-md">
+            <a href="#directory" class="px-space-lg py-3 rounded-xl bg-primary hover:bg-primary-hover text-on-primary font-body text-sm font-semibold transition-all duration-200 shadow-md flex items-center gap-space-xs group">
+              <span>Explore 12 Communities</span>
+              <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </a>
+            <button id="heroConnectBtn" onclick="openWalletModal()" class="px-space-lg py-3 rounded-xl bg-surface-container-high hover:bg-surface-container text-on-surface font-body text-sm font-semibold transition-all duration-200 shadow-xs border border-outline-variant/40 flex items-center gap-space-xs">
+              <span class="material-symbols-outlined text-secondary text-[18px]">account_balance_wallet</span>
+              <span>Connect Wallet to Verify</span>
+            </button>
+          </div>
+
+          <!-- Live Network Ticker -->
+          <div class="mt-space-lg inline-flex items-center gap-space-md px-space-md py-1.5 rounded-full bg-surface-container-low shadow-xs border border-outline-variant/30">
+            <div class="flex items-center gap-space-xs">
+              <span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+              <span class="font-body text-xs font-semibold text-secondary">Merkle Tree Height: 20</span>
+            </div>
+            <span class="text-outline-variant">•</span>
+            <span class="font-mono text-xs text-on-surface-variant">1,048,576 Max Capacity</span>
+            <span class="text-outline-variant">•</span>
+            <span class="font-mono text-xs text-primary font-semibold">0 Gas for Offline Rostering</span>
+          </div>
+
+          <!-- Merkle Cryptographic Pipeline Architecture Interactive Visualizer -->
+          <div class="w-full mt-space-xl p-space-md lg:p-space-lg rounded-2xl bg-surface-container-low shadow-subtle border border-outline-variant/30">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm mb-space-md pb-space-sm border-b border-outline-variant/20">
+              <div class="text-left">
+                <div class="flex items-center gap-space-xs">
+                  <span class="material-symbols-outlined text-primary text-[22px]">account_tree</span>
+                  <h3 class="font-display text-xl font-bold text-on-surface">Merkle Cryptographic Pipeline Architecture</h3>
+                </div>
+                <p class="font-body text-xs text-on-surface-variant mt-0.5">End-to-end zero-knowledge verification journey from offline ledger to verifiable sovereign seal.</p>
+              </div>
+              <div class="flex items-center gap-space-xs px-space-sm py-1 rounded-md bg-surface-container text-on-surface font-mono text-xs">
+                <span class="text-secondary font-bold">Poseidon & Keccak256</span>
+                <span class="text-outline-variant">|</span>
+                <span class="text-on-surface-variant">Polygon PoS</span>
+              </div>
+            </div>
+
+            <!-- 4 Pipeline Stages Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md text-left">
+              <div class="bg-surface-container rounded-xl p-space-md border border-outline-variant/40 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-space-sm">
+                    <span class="w-7 h-7 rounded-full bg-primary/10 text-primary font-display font-bold text-xs flex items-center justify-center">01</span>
+                    <span class="material-symbols-outlined text-secondary text-[20px]">encrypted</span>
+                  </div>
+                  <h4 class="font-display font-bold text-sm text-on-surface mb-1">Local Keystore & Salt</h4>
+                  <p class="font-body text-xs text-on-surface-variant">Citizen identifier and entropy secret are stored strictly on the local browser client.</p>
+                </div>
+                <div class="mt-3 pt-2 border-t border-outline-variant/20 font-mono text-[10px] text-secondary font-semibold">0 PII on Public Chain</div>
+              </div>
+
+              <div class="bg-surface-container rounded-xl p-space-md border border-outline-variant/40 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-space-sm">
+                    <span class="w-7 h-7 rounded-full bg-primary/10 text-primary font-display font-bold text-xs flex items-center justify-center">02</span>
+                    <span class="material-symbols-outlined text-primary text-[20px]">hub</span>
+                  </div>
+                  <h4 class="font-display font-bold text-sm text-on-surface mb-1">Merkle Tree Rollup</h4>
+                  <p class="font-body text-xs text-on-surface-variant">Steward aggregates hashed member leaves and computes root hash offline.</p>
+                </div>
+                <div class="mt-3 pt-2 border-t border-outline-variant/20 font-mono text-[10px] text-primary font-semibold">SHA3-256 Aggregation</div>
+              </div>
+
+              <div class="bg-surface-container rounded-xl p-space-md border border-outline-variant/40 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-space-sm">
+                    <span class="w-7 h-7 rounded-full bg-primary/10 text-primary font-display font-bold text-xs flex items-center justify-center">03</span>
+                    <span class="material-symbols-outlined text-tertiary text-[20px]">psychology</span>
+                  </div>
+                  <h4 class="font-display font-bold text-sm text-on-surface mb-1">Client-Side zkProof</h4>
+                  <p class="font-body text-xs text-on-surface-variant">Poseidon circuit verifies membership leaf belongs to root without exposing index.</p>
+                </div>
+                <div class="mt-3 pt-2 border-t border-outline-variant/20 font-mono text-[10px] text-tertiary font-semibold">Groth16 Zero-Leakage</div>
+              </div>
+
+              <div class="bg-surface-container rounded-xl p-space-md border border-outline-variant/40 flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-space-sm">
+                    <span class="w-7 h-7 rounded-full bg-primary/10 text-primary font-display font-bold text-xs flex items-center justify-center">04</span>
+                    <span class="material-symbols-outlined text-secondary text-[20px]">workspace_premium</span>
+                  </div>
+                  <h4 class="font-display font-bold text-sm text-on-surface mb-1">Soulbound Registry</h4>
+                  <p class="font-body text-xs text-on-surface-variant">EIP-5484 non-transferable civic credential minted directly to sovereign wallet.</p>
+                </div>
+                <div class="mt-3 pt-2 border-t border-outline-variant/20 font-mono text-[10px] text-secondary font-semibold">EIP-5484 Polygon</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured Communities Section -->
+      <section class="max-w-7xl mx-auto px-margin-mobile lg:px-margin py-space-xl">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm mb-space-lg">
+          <div>
+            <span class="font-body text-xs font-semibold uppercase tracking-wider text-primary">Sovereign Directory</span>
+            <h2 class="font-display text-2xl sm:text-3xl font-bold text-on-surface">Active Indian Chaupal Assemblies</h2>
+          </div>
+          <a href="#directory" class="px-space-md py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-xs font-semibold text-primary flex items-center gap-1 transition-all">
+            <span>View All 12 Communities</span>
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </a>
+        </div>
+
+        <div id="homeCommunitiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg">
+          <!-- Populated by JavaScript -->
+        </div>
+      </section>
+
+      <!-- Technical FAQ Accordions -->
+      <section class="max-w-4xl mx-auto px-margin-mobile lg:px-margin py-space-xl">
+        <div class="text-center mb-space-lg">
+          <span class="font-body text-xs font-semibold uppercase tracking-wider text-primary">Civic Architecture</span>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-on-surface mt-1">Frequently Asked Questions</h2>
+        </div>
+
+        <div class="space-y-space-sm">
+          <details class="group bg-surface-container-low rounded-xl p-space-md border border-outline-variant/30">
+            <summary class="font-display font-bold text-sm text-on-surface cursor-pointer list-none flex items-center justify-between">
+              <span>Why are member lists not stored on Ethereum or Polygon?</span>
+              <span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+            </summary>
+            <p class="font-body text-xs text-on-surface-variant mt-2 leading-relaxed">
+              Public blockchain ledgers are forever searchable. Publishing membership rosters exposes community members, donors, and stewards to targeted harassment, state overreach, and commercial profiling. Chaupal stores only rolling 32-byte Merkle Roots on-chain.
+            </p>
+          </details>
+
+          <details class="group bg-surface-container-low rounded-xl p-space-md border border-outline-variant/30">
+            <summary class="font-display font-bold text-sm text-on-surface cursor-pointer list-none flex items-center justify-between">
+              <span>How does Zero-Knowledge verification prove I am a member?</span>
+              <summary class="hidden"></summary>
+              <span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+            </summary>
+            <p class="font-body text-xs text-on-surface-variant mt-2 leading-relaxed">
+              Using client-side Poseidon SNARK circuits, your browser hashes your secret identifier and computes an authentication path to the community's root hash. You prove you know a valid leaf without disclosing which leaf is yours or who you are.
+            </p>
+          </details>
+
+          <details class="group bg-surface-container-low rounded-xl p-space-md border border-outline-variant/30">
+            <summary class="font-display font-bold text-sm text-on-surface cursor-pointer list-none flex items-center justify-between">
+              <span>What is an ERC-5484 Soulbound Seal?</span>
+              <span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform">expand_more</span>
+            </summary>
+            <p class="font-body text-xs text-on-surface-variant mt-2 leading-relaxed">
+              ERC-5484 tokens are non-transferable, soulbound cryptographic badges bound to your address. They cannot be sold, traded, or transferred, making them ideal for authentic voting rights, guild certifications, and communal trusts.
+            </p>
+          </details>
+        </div>
+      </section>
+    </section>
+
+    <!-- -----------------------------------------------------------------------
+         VIEW 2: COMMUNITY DIRECTORY
+         ----------------------------------------------------------------------- -->
+    <section id="view-directory" class="spa-view max-w-7xl mx-auto px-margin-mobile lg:px-margin pb-space-xl">
+      <!-- Top Title & Search Box -->
+      <div class="mb-space-lg flex flex-col md:flex-row md:items-center justify-between gap-space-md pt-4">
+        <div>
+          <h1 class="font-display text-3xl font-extrabold text-on-surface tracking-tight">Chaupal Community Directory</h1>
+          <p class="font-body text-sm text-on-surface-variant mt-1" id="directoryResultCount">12 Autonomous Indian Sangats & Guilds</p>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="relative w-full md:w-80">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+          <input id="directorySearchInput" oninput="handleDirectorySearch(this)" type="text" placeholder="Search communities, crafts, states..." class="w-full pl-10 pr-4 py-2 rounded-xl bg-surface-container-low border border-outline-variant/40 text-xs text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:border-primary transition-all"/>
+        </div>
+      </div>
+
+      <!-- Filters Ribbon -->
+      <div class="mb-space-lg bg-surface-container-low rounded-2xl p-space-md border border-outline-variant/30 shadow-subtle space-y-space-sm">
+        <!-- Region Filter Row -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="font-body text-xs font-bold text-on-surface-variant mr-2">Region:</span>
+          <button class="filter-region-btn px-3 py-1 rounded-lg text-xs font-semibold bg-surface-container-lowest text-primary shadow-xs transition-all" onclick="setRegionFilter('all', this)">All India</button>
+          <button class="filter-region-btn px-3 py-1 rounded-lg text-xs text-on-surface-variant hover:text-on-surface transition-all" onclick="setRegionFilter('north', this)">North</button>
+          <button class="filter-region-btn px-3 py-1 rounded-lg text-xs text-on-surface-variant hover:text-on-surface transition-all" onclick="setRegionFilter('south', this)">South</button>
+          <button class="filter-region-btn px-3 py-1 rounded-lg text-xs text-on-surface-variant hover:text-on-surface transition-all" onclick="setRegionFilter('east', this)">East</button>
+          <button class="filter-region-btn px-3 py-1 rounded-lg text-xs text-on-surface-variant hover:text-on-surface transition-all" onclick="setRegionFilter('west', this)">West</button>
+          <button class="filter-region-btn px-3 py-1 rounded-lg text-xs text-on-surface-variant hover:text-on-surface transition-all" onclick="setRegionFilter('central', this)">Central</button>
+        </div>
+
+        <!-- Status Filter Row -->
+        <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-outline-variant/20">
+          <span class="font-body text-xs font-bold text-on-surface-variant mr-2">Status:</span>
+          <button class="filter-status-btn px-3 py-1 rounded-lg text-xs font-semibold bg-surface-container-lowest text-primary shadow-xs transition-all" onclick="setStatusFilter('all', this)">All Statuses</button>
+          <button class="filter-status-btn px-3 py-1 rounded-lg text-xs text-on-surface-variant hover:text-on-surface transition-all" onclick="setStatusFilter('open', this)">Open for Verification</button>
+          <button class="filter-status-btn px-3 py-1 rounded-lg text-xs text-on-surface-variant hover:text-on-surface transition-all" onclick="setStatusFilter('updated', this)">Root Updated Recently</button>
+        </div>
+      </div>
+
+      <!-- 12 Community Sangat Grid -->
+      <div id="communityGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg">
+        <!-- Populated by JavaScript -->
+      </div>
+    </section>
+
+    <!-- -----------------------------------------------------------------------
+         VIEW 3: VERIFY & CLAIM FLOW WIZARD
+         ----------------------------------------------------------------------- -->
+    <section id="view-claim" class="spa-view max-w-5xl mx-auto px-margin-mobile lg:px-margin pb-space-xl">
+      <!-- Portal Masthead -->
+      <div class="bg-surface-container-low rounded-2xl p-space-lg lg:p-space-xl shadow-subtle border border-outline-variant/30 mb-space-lg pt-6">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-md">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="font-body text-xs uppercase tracking-widest text-primary font-bold">Zero-Knowledge Proof Wizard</span>
+              <span class="text-outline-variant">•</span>
+              <span class="font-body text-xs text-secondary font-medium">EIP-5484 Soulbound Mint</span>
+            </div>
+            <h1 class="font-display text-3xl font-extrabold text-on-surface">Member Verification & Claim Flow</h1>
+            <p class="font-body text-sm text-on-surface-variant mt-1">Generate zero-knowledge membership proofs client-side without disclosing phone numbers or identities.</p>
+          </div>
+          <div class="flex items-center gap-2 bg-surface-container-lowest px-4 py-2 rounded-xl border border-outline-variant/30 text-xs font-mono">
+            <span class="w-2 h-2 rounded-full bg-secondary"></span>
+            <span class="text-on-surface font-semibold">Polygon PoS #58,492,103</span>
+          </div>
+        </div>
+
+        <!-- 4 Step Tracker -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-space-lg pt-space-md border-t border-outline-variant/30 text-left">
+          <div id="step-nav-1" class="flex items-center gap-space-sm p-space-sm rounded-lg bg-surface-container text-primary font-semibold shadow-xs">
+            <span class="w-6 h-6 rounded-full bg-primary text-on-primary text-xs flex items-center justify-center font-bold">1</span>
+            <span class="font-body text-xs truncate">1. Choose Chaupal</span>
+          </div>
+          <div id="step-nav-2" class="flex items-center gap-space-sm p-space-sm rounded-lg opacity-50 text-on-surface-variant">
+            <span class="w-6 h-6 rounded-full bg-surface-container-highest text-on-surface text-xs flex items-center justify-center font-bold">2</span>
+            <span class="font-body text-xs truncate">2. zkProof Synthesis</span>
+          </div>
+          <div id="step-nav-3" class="flex items-center gap-space-sm p-space-sm rounded-lg opacity-50 text-on-surface-variant">
+            <span class="w-6 h-6 rounded-full bg-surface-container-highest text-on-surface text-xs flex items-center justify-center font-bold">3</span>
+            <span class="font-body text-xs truncate">3. Sign & Mint</span>
+          </div>
+          <div id="step-nav-4" class="flex items-center gap-space-sm p-space-sm rounded-lg opacity-50 text-on-surface-variant">
+            <span class="w-6 h-6 rounded-full bg-surface-container-highest text-on-surface text-xs flex items-center justify-center font-bold">4</span>
+            <span class="font-body text-xs truncate">4. Soulbound Seal</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wizard Step 1: Community & Secret Selection -->
+      <div id="claim-step-1-content" class="bg-surface-container-low rounded-2xl p-space-lg lg:p-space-xl shadow-subtle border border-outline-variant/30 space-y-space-md">
+        <div>
+          <h2 class="font-display text-xl font-bold text-on-surface">Step 1: Select Community & Input Secret Identifier</h2>
+          <p class="font-body text-xs text-on-surface-variant mt-0.5">Your email, phone, or token is hashed on your device. The plaintext never leaves your browser.</p>
+        </div>
+
+        <div class="space-y-space-md">
+          <div>
+            <label class="font-body text-xs font-bold text-on-surface block mb-1">Target Community</label>
+            <select id="claimCommunitySelect" onchange="updateClaimCommunityContext()" class="w-full p-3 rounded-xl bg-surface-container-lowest border border-outline-variant/40 text-sm text-on-surface focus:outline-none focus:border-primary font-medium">
+              <!-- Options populated by JS -->
+            </select>
+          </div>
+
+          <!-- Community Metadata Card -->
+          <div class="bg-surface-container rounded-xl p-space-md font-mono text-xs space-y-1 border border-outline-variant/30">
+            <div class="flex justify-between">
+              <span class="text-on-surface-variant">Community:</span>
+              <span id="claimCommunityTitle" class="text-primary font-semibold">Punjabi Sangat</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-on-surface-variant">Merkle Root:</span>
+              <span id="claimCommunityRoot" class="text-on-surface font-semibold truncate max-w-[200px]">0x9f8be4a16723...</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-on-surface-variant">Citizens Count:</span>
+              <span id="claimCommunityMembers" class="text-secondary font-semibold">1,428 Citizens</span>
+            </div>
+            <div class="pt-1 border-t border-outline-variant/20 text-on-surface-variant text-[11px]">
+              <span class="font-semibold text-on-surface block mb-0.5">Eligibility:</span>
+              <span id="claimCommunityRules">Participation in certified Sangat assemblies or 2 elder recommendations.</span>
+            </div>
+          </div>
+
+          <div>
+            <label class="font-body text-xs font-bold text-on-surface block mb-1">Private Member Identifier (Email, Phone, or Invite Key)</label>
+            <input id="claimMemberIdentifier" type="text" value="gurpreet.singh@sangat.org" placeholder="e.g. gurpreet.singh@sangat.org or +919812345678" class="w-full p-3 rounded-xl bg-surface-container-lowest border border-outline-variant/40 text-sm text-on-surface font-mono focus:outline-none focus:border-primary"/>
+            <p class="font-body text-[11px] text-on-surface-variant mt-1 flex items-center gap-1">
+              <span class="material-symbols-outlined text-secondary text-[14px]">lock</span>
+              <span>This identifier is hashed using Poseidon BN254 locally.</span>
+            </p>
+          </div>
+
+          <div class="pt-space-sm flex justify-end">
+            <button onclick="startZKProofGeneration()" class="px-space-lg py-3 rounded-xl bg-primary hover:bg-primary-hover text-on-primary text-xs font-bold shadow-sm flex items-center gap-2 transition-all">
+              <span>Initiate Zero-Knowledge Proof</span>
+              <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wizard Step 2: ZK Proof Computation Terminal -->
+      <div id="claim-step-2-content" class="bg-surface-container-low rounded-2xl p-space-lg lg:p-space-xl shadow-subtle border border-outline-variant/30 space-y-space-md hidden">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="font-display text-xl font-bold text-on-surface">Step 2: Synthesizing Zero-Knowledge Witness</h2>
+            <p class="font-body text-xs text-on-surface-variant mt-0.5">Circom Poseidon arithmetic circuit calculating proof of inclusion.</p>
+          </div>
+          <span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-xs font-mono font-semibold">Poseidon-T3</span>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="w-full bg-surface-container-highest rounded-full h-2 overflow-hidden">
+          <div id="zkProgressBar" class="bg-primary h-full rounded-full transition-all duration-300" style="width: 20%"></div>
+        </div>
+
+        <!-- Simulated Terminal Output -->
+        <div id="zkConsoleOutput" class="bg-surface-container-highest rounded-xl p-space-md font-mono text-xs text-on-surface space-y-2 h-44 overflow-y-auto border border-outline-variant/40">
+          <!-- Logs added via JS -->
+        </div>
+
+        <div class="pt-space-sm flex items-center justify-between">
+          <button onclick="setClaimStep(1)" class="px-space-md py-2 rounded-xl bg-surface-container text-xs font-semibold text-on-surface">Back</button>
+          <button id="zkProceedStep3Btn" onclick="setClaimStep(3)" disabled class="px-space-lg py-2.5 rounded-xl bg-primary text-on-primary text-xs font-bold shadow-sm opacity-50 cursor-not-allowed flex items-center gap-2">
+            <span>Proceed to Minting</span>
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Wizard Step 3: Wallet Signature & Minting -->
+      <div id="claim-step-3-content" class="bg-surface-container-low rounded-2xl p-space-lg lg:p-space-xl shadow-subtle border border-outline-variant/30 space-y-space-md hidden">
+        <div>
+          <h2 class="font-display text-xl font-bold text-on-surface">Step 3: Sign & Mint EIP-5484 Soulbound Credential</h2>
+          <p class="font-body text-xs text-on-surface-variant mt-0.5">Submit your zero-knowledge proof to the Chaupal registry contract on Polygon PoS.</p>
+        </div>
+
+        <div class="bg-surface-container rounded-xl p-space-md font-mono text-xs space-y-2 border border-outline-variant/30">
+          <div class="flex justify-between">
+            <span class="text-on-surface-variant">Recipient Wallet:</span>
+            <span class="text-primary font-semibold wallet-address-display">0x71C...49b2</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-on-surface-variant">Contract Address:</span>
+            <span class="text-on-surface truncate max-w-[200px]">0x71A9f8b73a210fcbe11985daec4a123985710293</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-on-surface-variant">Network Fee (Gas):</span>
+            <span class="text-secondary font-semibold">Gasless (Sponsored by Community Multi-sig)</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-on-surface-variant">Transferability:</span>
+            <span class="text-primary font-bold">NON-TRANSFERABLE (Soulbound)</span>
+          </div>
+        </div>
+
+        <div class="pt-space-sm flex items-center justify-between">
+          <button onclick="setClaimStep(2)" class="px-space-md py-2 rounded-xl bg-surface-container text-xs font-semibold text-on-surface">Back</button>
+          <button id="mintSealSubmitBtn" onclick="simulateMintSeal()" class="px-space-lg py-3 rounded-xl bg-primary hover:bg-primary-hover text-on-primary text-xs font-bold shadow-md flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px]">key</span>
+            <span>Sign & Mint Soulbound Seal</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Wizard Step 4: Minting Success -->
+      <div id="claim-step-4-content" class="bg-surface-container-low rounded-2xl p-space-lg lg:p-space-xl shadow-subtle border border-outline-variant/30 text-center space-y-space-md hidden">
+        <div class="w-16 h-16 mx-auto rounded-full bg-secondary-container text-secondary flex items-center justify-center shadow-xs">
+          <span class="material-symbols-outlined text-[36px]">check_circle</span>
+        </div>
+
+        <div>
+          <span class="font-body text-xs font-bold uppercase tracking-wider text-secondary">Minted On-Chain</span>
+          <h2 class="font-display text-3xl font-extrabold text-on-surface mt-1">Soulbound Civic Seal Issued!</h2>
+          <p class="font-body text-xs text-on-surface-variant max-w-md mx-auto mt-1">Your cryptographic credential has been recorded into your browser keystore and bound to your address.</p>
+        </div>
+
+        <!-- Seal Preview Card Container -->
+        <div id="step-4-seal-preview" class="py-2">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="pt-space-sm flex flex-wrap items-center justify-center gap-space-sm">
+          <a href="#dashboard" class="px-space-lg py-2.5 rounded-xl bg-primary hover:bg-primary-hover text-on-primary text-xs font-bold shadow-sm flex items-center gap-1">
+            <span class="material-symbols-outlined text-[16px]">workspace_premium</span>
+            <span>Go to My Seals</span>
+          </a>
+          <button onclick="setClaimStep(1)" class="px-space-md py-2.5 rounded-xl bg-surface-container hover:bg-surface-container-high text-xs font-semibold text-on-surface">
+            Verify Another Chaupal
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- -----------------------------------------------------------------------
+         VIEW 4: MEMBER DASHBOARD & SOULBOUND SEALS
+         ----------------------------------------------------------------------- -->
+    <section id="view-dashboard" class="spa-view max-w-7xl mx-auto px-margin-mobile lg:px-margin pb-space-xl">
+      <!-- Top Civic Hero -->
+      <div class="relative overflow-hidden rounded-2xl bg-surface-container p-space-lg lg:p-space-xl shadow-subtle border border-outline-variant/30 mb-space-lg pt-6">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-lg">
+          <div class="max-w-3xl space-y-space-xs">
+            <div class="inline-flex items-center gap-space-xs px-space-md py-1 rounded-full bg-secondary-container text-on-secondary-container text-xs font-semibold">
+              <span class="w-2 h-2 rounded-full bg-secondary"></span>
+              <span>Cryptographic Member Ledger</span>
+              <span class="opacity-40">•</span>
+              <span>Zero-Leakage Status</span>
+            </div>
+            <h1 class="font-display text-3xl sm:text-4xl font-extrabold text-on-surface tracking-tight">
+              My Chaupal Seals
+            </h1>
+            <p class="font-body text-sm text-on-surface-variant leading-relaxed">
+              Soulbound cryptographic credentials anchored to wallet <span class="font-mono px-2 py-0.5 rounded bg-surface font-semibold text-primary wallet-address-display">0x71C...49b2</span>. Each seal proves inclusion without exposing PII.
+            </p>
+          </div>
+
+          <!-- Seal Visual Stat Box -->
+          <div class="flex-shrink-0 flex items-center gap-space-md bg-surface-container-lowest p-space-md rounded-2xl shadow-xs border border-outline-variant/30">
+            <div class="relative w-16 h-16 rounded-full bg-surface-container flex items-center justify-center">
+              <span class="material-symbols-outlined text-primary text-[32px]" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-body text-xs text-on-surface-variant uppercase tracking-wider">Soulbound State</span>
+              <span class="font-display text-lg font-bold text-on-surface">ERC-5484 Active</span>
+              <span class="font-body text-xs text-secondary font-semibold">Non-Transferable Plinth</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Stat Counters -->
+        <div class="mt-space-lg pt-space-md grid grid-cols-2 lg:grid-cols-4 gap-space-md border-t border-outline-variant/30">
+          <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-xs">
+            <span class="font-body text-xs text-on-surface-variant block">Total Active Seals</span>
+            <div class="flex items-baseline gap-2 mt-1">
+              <span id="totalSealsCountDisplay" class="font-display text-2xl font-bold text-primary">3</span>
+              <span class="font-body text-xs text-outline font-medium">/ 12 Available</span>
+            </div>
+          </div>
+          <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-xs">
+            <span class="font-body text-xs text-on-surface-variant block">First Seal Block</span>
+            <div class="mt-1 font-mono text-sm font-bold text-on-surface">#58,410,204</div>
+            <span class="font-body text-[11px] text-on-surface-variant">Nov 02, 2024</span>
+          </div>
+          <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-xs">
+            <span class="font-body text-xs text-on-surface-variant block">Privacy Standard</span>
+            <div class="mt-1 font-display text-sm font-bold text-on-surface">Merkle Leaf zkCommit</div>
+            <span class="font-body text-[11px] text-secondary font-semibold flex items-center gap-1">
+              <span class="material-symbols-outlined text-[13px]">shield</span> Poseidon Validated
+            </span>
+          </div>
+          <div class="bg-surface-container-lowest rounded-xl p-space-md shadow-xs">
+            <span class="font-body text-xs text-on-surface-variant block">Anchor Layer</span>
+            <div class="mt-1 flex items-center gap-1.5 font-display text-sm font-bold text-on-surface">
+              <span class="w-2 h-2 rounded-full bg-secondary"></span>
+              <span>Polygon Mainnet</span>
+            </div>
+            <span class="font-mono text-[11px] text-on-surface-variant">Gasless ZK Rollup</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seals Grid Header -->
+      <div class="flex items-center justify-between mb-space-md">
+        <h2 class="font-display text-xl font-bold text-on-surface">Active Soulbound Seals</h2>
+        <a href="#claim" class="px-space-md py-1.5 rounded-lg bg-primary hover:bg-primary-hover text-on-primary text-xs font-semibold shadow-xs flex items-center gap-1">
+          <span class="material-symbols-outlined text-[16px]">add</span>
+          <span>Claim New Seal</span>
+        </a>
+      </div>
+
+      <!-- Claimed Seals Grid -->
+      <div id="claimedGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg">
+        <!-- Populated by JavaScript -->
+      </div>
+    </section>
+
+    <!-- -----------------------------------------------------------------------
+         VIEW 5: STEWARD CONSOLE & ROOT PUBLISHER
+         ----------------------------------------------------------------------- -->
+    <section id="view-steward" class="spa-view max-w-7xl mx-auto px-margin-mobile lg:px-margin pb-space-xl">
+      <!-- Top Title & Metrics -->
+      <div class="mb-space-lg pt-4">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm mb-space-md">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="font-body text-xs uppercase tracking-widest text-primary font-bold">Steward Authority Plinth</span>
+              <span class="text-outline-variant">•</span>
+              <span class="font-body text-xs text-secondary font-medium">Offline Keystore Sovereign</span>
+            </div>
+            <h1 class="font-display text-3xl font-extrabold text-on-surface">Steward Console & Root Publisher</h1>
+          </div>
+          <button onclick="publishRootOnChain()" id="publishRootBtn" class="px-space-lg py-2.5 rounded-xl bg-primary hover:bg-primary-hover text-on-primary text-xs font-bold shadow-md flex items-center gap-2 transition-all">
+            <span class="material-symbols-outlined text-[18px]">publish</span>
+            <span>Publish Root On-Chain</span>
+          </button>
+        </div>
+
+        <!-- 4 Steward Metrics -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+          <div class="p-space-md rounded-2xl bg-surface-container-low shadow-subtle border border-outline-variant/30">
+            <div class="flex items-center justify-between text-xs text-on-surface-variant uppercase tracking-wider mb-1">
+              <span>Active Tree Root</span>
+              <span class="material-symbols-outlined text-secondary text-[18px]">account_tree</span>
+            </div>
+            <div id="stewardOnChainRoot" class="font-mono text-xs font-bold text-primary truncate" title="0x9f8be4a16723cd8192a5431802bb01c8fa627192d774a123f81902a65b819201">
+              0x9f8be4a1...819201
+            </div>
+            <div class="mt-2 text-[11px] text-secondary font-semibold">Synchronized on Polygon</div>
+          </div>
+
+          <div class="p-space-md rounded-2xl bg-surface-container-low shadow-subtle border border-outline-variant/30">
+            <div class="flex items-center justify-between text-xs text-on-surface-variant uppercase tracking-wider mb-1">
+              <span>Offline Roster Members</span>
+              <span class="material-symbols-outlined text-primary text-[18px]">group</span>
+            </div>
+            <div id="stewardMemberCount" class="font-display text-2xl font-bold text-on-surface">8</div>
+            <div class="mt-1 text-[11px] text-on-surface-variant">Tree Depth: <span id="stewardTreeDepth" class="font-mono font-semibold text-on-surface">4 Levels</span></div>
+          </div>
+
+          <div class="p-space-md rounded-2xl bg-surface-container-low shadow-subtle border border-outline-variant/30">
+            <div class="flex items-center justify-between text-xs text-on-surface-variant uppercase tracking-wider mb-1">
+              <span>Calculated New Root</span>
+              <span class="material-symbols-outlined text-tertiary text-[18px]">calculate</span>
+            </div>
+            <div id="stewardCalculatedRoot" class="font-mono text-xs font-bold text-tertiary truncate">
+              0x9f8be4a1...819201
+            </div>
+            <div class="mt-2 text-[11px] text-secondary font-semibold">Computed Client-Side</div>
+          </div>
+
+          <div class="p-space-md rounded-2xl bg-surface-container-low shadow-subtle border border-outline-variant/30">
+            <div class="flex items-center justify-between text-xs text-on-surface-variant uppercase tracking-wider mb-1">
+              <span>Steward Multi-Sig</span>
+              <span class="material-symbols-outlined text-secondary text-[18px]">verified_user</span>
+            </div>
+            <div class="font-display text-sm font-bold text-on-surface">3 of 5 Quorum</div>
+            <div class="mt-1 text-[11px] text-secondary font-semibold">All Signatures Valid</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Roster Management Card -->
+      <div class="bg-surface-container-low rounded-2xl p-space-lg shadow-subtle border border-outline-variant/30 space-y-space-md">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm pb-space-sm border-b border-outline-variant/20">
+          <div>
+            <h3 class="font-display text-lg font-bold text-on-surface">Offline Membership Ledger (Local Keystore)</h3>
+            <p class="font-body text-xs text-on-surface-variant">Add or import members. Every edit automatically recalculates the Merkle Tree Root in real time.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <!-- CSV Import Button -->
+            <label class="px-space-md py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-xs font-semibold text-on-surface cursor-pointer flex items-center gap-1 shadow-xs border border-outline-variant/30">
+              <span class="material-symbols-outlined text-[16px]">upload_file</span>
+              <span>Import CSV</span>
+              <input type="file" accept=".csv" class="hidden" onchange="handleCSVUpload(event)"/>
+            </label>
+            <!-- Add Member Button -->
+            <button onclick="openAddMemberModal()" class="px-space-md py-2 rounded-xl bg-primary hover:bg-primary-hover text-on-primary text-xs font-bold shadow-xs flex items-center gap-1">
+              <span class="material-symbols-outlined text-[16px]">person_add</span>
+              <span>Add Member</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Roster Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="border-b border-outline-variant/30 font-body text-xs uppercase tracking-wider text-on-surface-variant">
+                <th class="py-space-sm px-space-md">Member ID</th>
+                <th class="py-space-sm px-space-md">Full Name</th>
+                <th class="py-space-sm px-space-md">Identifier / Salt</th>
+                <th class="py-space-sm px-space-md">Role</th>
+                <th class="py-space-sm px-space-md">Status</th>
+                <th class="py-space-sm px-space-md text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody id="stewardRosterTableBody">
+              <!-- Populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       GLOBAL FOOTER
+       ========================================================================= -->
+  <footer class="w-full bg-surface-container-low py-space-xl mt-space-xl border-t border-outline-variant/30 shadow-subtle no-print">
+    <div class="max-w-7xl mx-auto px-margin-mobile lg:px-margin">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg pb-space-lg items-start border-b border-outline-variant/20">
+        <div class="space-y-space-xs">
+          <div class="flex items-center gap-space-xs">
+            <span class="material-symbols-outlined text-secondary text-[22px]">verified_user</span>
+            <h4 class="font-display font-bold text-base text-on-surface">Privacy Guarantee</h4>
+          </div>
+          <p class="font-body text-xs text-on-surface-variant leading-relaxed">
+            Identity credentials are held purely off-chain within the citizen's browser wallet. Only zero-knowledge proofs and rolling Merkle state roots are shared with verifiers.
+          </p>
+        </div>
+
+        <div class="space-y-space-xs">
+          <div class="flex items-center gap-space-xs">
+            <span class="material-symbols-outlined text-primary text-[22px]">terminal</span>
+            <h4 class="font-display font-bold text-base text-on-surface">Open Verifier</h4>
+          </div>
+          <p class="font-body text-xs text-on-surface-variant leading-relaxed">
+            Independent audits and circom-based verification keys are maintained in the open public registry.
+          </p>
+          <a class="inline-flex items-center gap-1 font-body text-xs font-semibold text-primary hover:text-primary-hover" href="https://github.com" target="_blank">
+            <span>View GitHub Verifier</span>
+            <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+          </a>
+        </div>
+
+        <div class="space-y-space-xs">
+          <div class="flex items-center gap-space-xs">
+            <span class="material-symbols-outlined text-secondary text-[22px]">security</span>
+            <h4 class="font-display font-bold text-base text-on-surface">Cryptographic Assurance</h4>
+          </div>
+          <p class="font-body text-xs text-on-surface-variant leading-relaxed">
+            Poseidon hashes, Groth16 zk-SNARK verification circuits, and persistent on-chain commitments audited by community consensus.
+          </p>
+        </div>
+      </div>
+
+      <div class="pt-space-md flex flex-col sm:flex-row items-center justify-between gap-space-md text-xs text-on-surface-variant">
+        <span>© 2025 Chaupal Platform • Indigenous Zero-Knowledge Governance Commons</span>
+        <div class="flex items-center gap-space-lg">
+          <span class="text-secondary flex items-center gap-1 font-semibold">
+            <span class="w-2 h-2 rounded-full bg-secondary"></span> ZK-Rollup Synced
+          </span>
+          <span class="font-mono">Block #61984210</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       MODALS & OVERLAYS
+       ========================================================================= -->
+
+  <!-- 1. Wallet Connection Modal -->
+  <div id="walletModalBackdrop" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-surface rounded-2xl max-w-md w-full p-space-lg shadow-modal border border-outline-variant/40">
+      <div class="flex items-center justify-between pb-space-sm border-b border-outline-variant/20 mb-space-md">
+        <h3 class="font-display text-lg font-bold text-on-surface">Connect Civic Wallet</h3>
+        <button onclick="closeWalletModal()" class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <p class="font-body text-xs text-on-surface-variant mb-space-md">
+        Select your Web3 wallet to generate zero-knowledge membership proofs on Polygon PoS.
+      </p>
+
+      <div class="space-y-2">
+        <button onclick="connectWallet('MetaMask')" class="w-full p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container flex items-center justify-between text-left transition-colors border border-outline-variant/30">
+          <div class="flex items-center gap-space-sm">
+            <span class="material-symbols-outlined text-primary text-[24px]">account_balance_wallet</span>
+            <div>
+              <p class="font-body text-xs font-bold text-on-surface">MetaMask</p>
+              <p class="font-body text-[11px] text-on-surface-variant">Recommended for Desktop & Mobile</p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-outline text-[18px]">chevron_right</span>
+        </button>
+
+        <button onclick="connectWallet('WalletConnect')" class="w-full p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container flex items-center justify-between text-left transition-colors border border-outline-variant/30">
+          <div class="flex items-center gap-space-sm">
+            <span class="material-symbols-outlined text-secondary text-[24px]">qr_code_scanner</span>
+            <div>
+              <p class="font-body text-xs font-bold text-on-surface">WalletConnect</p>
+              <p class="font-body text-[11px] text-on-surface-variant">Scan QR with Trust, Rainbow, etc.</p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-outline text-[18px]">chevron_right</span>
+        </button>
+
+        <button onclick="connectWallet('Coinbase Wallet')" class="w-full p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container flex items-center justify-between text-left transition-colors border border-outline-variant/30">
+          <div class="flex items-center gap-space-sm">
+            <span class="material-symbols-outlined text-tertiary text-[24px]">shield</span>
+            <div>
+              <p class="font-body text-xs font-bold text-on-surface">Coinbase Wallet</p>
+              <p class="font-body text-[11px] text-on-surface-variant">Passkey & biometric unlock</p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-outline text-[18px]">chevron_right</span>
+        </button>
+
+        <button onclick="connectWallet('Demo Anonymous')" class="w-full p-space-md rounded-xl bg-secondary-container/40 hover:bg-secondary-container/60 flex items-center justify-between text-left transition-colors border border-secondary/30">
+          <div class="flex items-center gap-space-sm">
+            <span class="material-symbols-outlined text-secondary text-[24px]">key</span>
+            <div>
+              <p class="font-body text-xs font-bold text-on-surface">Instant Demo Account</p>
+              <p class="font-body text-[11px] text-on-surface-variant">Simulated private anonymous key</p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-secondary text-[18px]">chevron_right</span>
+        </button>
+      </div>
+
+      <div class="mt-space-md p-space-sm rounded-lg bg-surface-container-low flex items-center gap-space-xs text-[11px] text-on-surface-variant border border-outline-variant/20">
+        <span class="material-symbols-outlined text-secondary text-[16px]">lock</span>
+        <span>Chaupal will never request access to your private key or seed phrase.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Community Detail Modal -->
+  <div id="communityDetailModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-surface rounded-2xl max-w-lg w-full p-space-lg shadow-modal border border-outline-variant/40 max-h-[90vh] overflow-y-auto">
+      <div id="communityDetailBody">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Proof Inspector Drawer / Modal -->
+  <div id="proofInspectorModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-surface rounded-2xl max-w-xl w-full p-space-lg shadow-modal border border-outline-variant/40 max-h-[90vh] overflow-y-auto">
+      <div id="proofInspectorBody">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Printable Certificate Modal -->
+  <div id="certificateModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-surface rounded-2xl max-w-2xl w-full p-space-lg shadow-modal border border-outline-variant/40 max-h-[90vh] overflow-y-auto">
+      <div id="certificateModalBody">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Add Member to Roster Modal -->
+  <div id="addMemberModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-surface rounded-2xl max-w-md w-full p-space-lg shadow-modal border border-outline-variant/40">
+      <div class="flex items-center justify-between pb-space-sm border-b border-outline-variant/20 mb-space-md">
+        <h3 class="font-display text-lg font-bold text-on-surface">Add Member to Offline Roster</h3>
+        <button onclick="closeAddMemberModal()" class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+          <span class="material-symbols-outlined text-[18px]">close</span>
+        </button>
+      </div>
+
+      <form onsubmit="submitAddMember(event)" class="space-y-space-md">
+        <div>
+          <label class="font-body text-xs font-bold text-on-surface block mb-1">Full Citizen Name</label>
+          <input id="newMemberName" required type="text" placeholder="e.g. Jaspreet Singh" class="w-full p-2.5 rounded-xl bg-surface-container-low border border-outline-variant/40 text-xs text-on-surface focus:outline-none focus:border-primary"/>
+        </div>
+
+        <div>
+          <label class="font-body text-xs font-bold text-on-surface block mb-1">Identifier (Email or Phone)</label>
+          <input id="newMemberEmail" required type="text" placeholder="e.g. jaspreet@sangat.org" class="w-full p-2.5 rounded-xl bg-surface-container-low border border-outline-variant/40 text-xs text-on-surface font-mono focus:outline-none focus:border-primary"/>
+        </div>
+
+        <div>
+          <label class="font-body text-xs font-bold text-on-surface block mb-1">Community Role</label>
+          <select id="newMemberRole" class="w-full p-2.5 rounded-xl bg-surface-container-low border border-outline-variant/40 text-xs text-on-surface font-medium focus:outline-none focus:border-primary">
+            <option value="Community Member">Community Member</option>
+            <option value="Langar Sevak">Langar Sevak</option>
+            <option value="Elder / Trustee">Elder / Trustee</option>
+            <option value="Youth Coordinator">Youth Coordinator</option>
+            <option value="Literature Steward">Literature Steward</option>
+          </select>
+        </div>
+
+        <div class="pt-space-xs flex justify-end gap-2">
+          <button type="button" onclick="closeAddMemberModal()" class="px-space-md py-2 rounded-xl bg-surface-container text-xs font-semibold text-on-surface">Cancel</button>
+          <button type="submit" class="px-space-lg py-2 rounded-xl bg-primary hover:bg-primary-hover text-on-primary text-xs font-bold shadow-xs">Add & Recalculate Root</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Stacker -->
+  <div id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="js/crypto-utils.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

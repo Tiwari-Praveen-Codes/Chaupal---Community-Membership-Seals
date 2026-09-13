@@ -1,0 +1,10 @@
+{
+  "groupSlug": "maharashtra-ganesh-mandal",
+  "groupId": "0xad56af723b7399010fcd051f28a1e4d8b2c85872956866b015198b8fb2c555cb",
+  "member": "0x3333333333333333333333333333333333333333",
+  "proof": [
+    "0xc52a6dc7fe479b98291d8e51410b83ec6881d9f27bb50f9738d9e01b71ce2ea3"
+  ],
+  "leaf": "0xf913da01a4b5b8e4ab7dbb446f8f42174e71f8d02a65e6515954c71fa3ae4ad8",
+  "root": "0x22b75c2bc17b0ea836df876d0330bb65130f5fa5b7c5abe2559f70bdba128534"
+}

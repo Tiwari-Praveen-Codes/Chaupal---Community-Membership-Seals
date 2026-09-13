@@ -1,0 +1,11 @@
+{
+  "groupSlug": "tamil-heritage-circle",
+  "groupId": "0x910335c2c61893764fe515276c710a5aa0ae63ffcaeed9ee1167b3486a2e61cf",
+  "member": "0x9999999999999999999999999999999999999999",
+  "proof": [
+    "0xa65044c36f18dcd9bc9fc552fd00eef40411ed10b24079fe008b849382dfaaa8",
+    "0xf20d7707868aa46cb7a340f43575bd0301de05fb7210eb17d7205d570a815ec8"
+  ],
+  "leaf": "0x770ce1d4cdcafe67ee7ed236207b278f43c86444f56d5b78cd1af66af09cf75e",
+  "root": "0x855b10f22be6b7acf4fbc0a3a1d7eaca18109a0a3fd6c2c872e5e0fce202aac0"
+}
